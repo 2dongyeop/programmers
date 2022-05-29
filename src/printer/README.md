@@ -1,6 +1,7 @@
 ## 프린터
 
 ----
+[개인 노션 링크](https://leedongyeop.notion.site/8170e8dbe92045f39f75830a1dd70fe9)
 
 [문제 원본 링크](https://programmers.co.kr/learn/courses/30/lessons/42587)
 <br/>
