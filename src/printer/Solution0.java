@@ -3,7 +3,7 @@ package printer;
 import java.util.*;
 
 public class Solution0 {
-    class Node {
+    static class Node {
         int location;
         int prior;
 
@@ -22,23 +22,25 @@ public class Solution0 {
 
         int now = 0;
 
-        dwl:
-        while (!q.isEmpty()) {
-            Node peekNode = q.peek();
+        try {
+            dwl:
+            while (!q.isEmpty()) {
+                Node peekNode = q.peek();
 
-            for (Node n : q) {
-                if (n.prior > peekNode.prior) {
-                    q.poll();
-                    q.add(peekNode);
-                } else {
-                    now++;
-                    if (peekNode.location == location) {
-                        answer = now;
-                        break dwl;
+                for (Node n : q) {
+                    if (n.prior > peekNode.prior) {
+                        q.poll();
+                        q.add(peekNode);
+                    } else {
+                        now++;
+                        if (peekNode.location == location) {
+                            answer = now;
+                            break dwl;
+                        }
                     }
                 }
             }
-        }
+        } catch (ConcurrentModificationException e) {}
         return answer;
     }
 }
