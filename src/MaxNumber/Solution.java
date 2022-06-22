@@ -4,55 +4,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    private int maxNumber;
-    List<String> temp = new ArrayList<>();
-    List<String> maxList = new ArrayList<>();
-    List<String> e = new ArrayList<>();
+    int maxNumber;
+    List<Integer> list = new ArrayList<>();
+    List<Integer> temp = new ArrayList<>();
 
     public String solution(int[] numbers) {
-        int max = numbers[0];
+        arrayToList(temp, numbers); //temp에다 배열을 복사
 
-        for (int i = 0 ; i < numbers.length; i++) {
-//            if (numbers[i])
-        }
+        do {
+            maxNumber = temp.get(0);
+            for (int i = 0; i < temp.size(); i++) {
 
-        String answer = "";
+                int digit = temp.get(i) / 10;
+                addMaxNum(maxNumber, temp.get(i), digit, i);
+            }
+        } while (list.size() == numbers.length);
+
+        String answer = list.toString();
         return answer;
     }
 
-//    public String solution(int[] numbers) {
-//        copyArray(temp, numbers);   //temp에 복사
-//
-//        for (int i = 0; i < numbers.length; i++) {
-//            maxNumber(temp); //첫번째 자리에 들어갈 숫자를 temp에서 가져와 maxList에 넣음
-//        }
-//
-//        String answer = e.toString();
-//        return answer;
-//    }
-
-    public void copyArray(List list, int[] array) {
+    public void arrayToList(List list, int[] array) {
         for (int i = 0; i < array.length; i++) {
-            String s = String.valueOf(array[i]);
+            int a = array[i];
 
-            list.add(s);
+            list.add(a);
         }
     }
 
-    public void maxNumber(List list) {
-        maxNumber = Integer.parseInt(String.valueOf(list.get(0).toString().charAt(0)));
-
-        for (int i = 1; i < list.size(); i++) {
-            if (maxNumber < Integer.parseInt(String.valueOf(list.get(i).toString().charAt(0)))) {
-                maxNumber = Integer.parseInt(String.valueOf(list.get(i).toString().charAt(0)));
-
-                list.remove(i);
-                maxList.add(String.valueOf(maxNumber));
+    public void addMaxNum(int currentMax, int num, int digit, int index) {
+        if (digit < 1) { //1자리수
+            if (currentMax < num) {
+                maxNumber = num;
+                temp.remove(index);
+                list.add(maxNumber);
             }
+        } else if (digit < 10) { //2자리수
+            if (currentMax < num) {
+                maxNumber = num;
+                temp.remove(index);
+                list.add(maxNumber);
+            }
+        } else if (digit < 100) { //3자리수
+            if (currentMax < num) {
+                maxNumber = num;
+                temp.remove(index);
+                list.add(maxNumber);
+            }
+        } else if (digit == 1000) {
+            //maxNumber일리가 없다고 생각하여 과정 생략
         }
-    }
-
-    public static void main(String[] args) {
-        int a = 10;
     }
 }
+
+
+//int a가 0~9이면 a / 10 = 0; -> 1미만이면 1자리수
+//11~99면 1~9;                -> 10미만이면 2자리수
+//101~999면 10~99;            -> 100미만이면 3자리수
