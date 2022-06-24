@@ -1,53 +1,70 @@
 package moreSpicy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    static int count = 0;
-    static int first = 0, second = 0;
+    static int count = 0; //섞은 횟수
+    static int first = 0, second = 0; //첫째, 둘째로 작은 수의 인덱스
+    List<Integer> list = new ArrayList<>();
 
     int solution(int[] scoville, int K) {
-        int answer = 0;
-        int[] copy = new int[scoville.length];
+        arrayToList(list, scoville);
 
-        while (!isBiggerK(scoville, K)) {
-            makeSpicy(scoville);
-
+        while (!isBiggerK(list, K)) {
+            makeSpicy(list);
         }
 
-        answer = count;
+        int answer = count;
         return answer;
     }
 
-    boolean isBiggerK(int[] scoville, int K) {
-        int countSmall = 0;
-        for (int i = 0; i < scoville.length; i++) {
-                if (scoville[i] < K) countSmall++;
-        }
+    static void arrayToList(List list, int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int a = array[i];
 
-        if (countSmall != 0) return false;
-        else return true;
+            list.add(a);
+        }
     }
 
-    void makeSpicy(int[] scoville) {
-        chooseSmall(scoville);
+    static boolean isBiggerK(List list, int K) {
+        boolean isBigger = true;
+        ;
+        for (int i = 0; i < list.size(); i++) {
+            int temp = (int) list.get(i);
 
+            if (temp < K) isBigger = false;
+        }
+        return isBigger;
+    }
 
+    static void makeSpicy(List list) {
+        chooseSmall(list);
 
+        int a = (int) list.get(first);
+        int b = (int) list.get(second);
+        int c = a + 2 * b;
+
+        list.add(c);
+        list.remove(first);
+        list.remove(second);
         count++;
     }
 
-    public void chooseSmall(int[] scoville) {
-        for (int i = 0; i < scoville.length; i++) {
-            if (first > scoville[i]) {
-                first = scoville[i];
-            } 
-        }
+    static void chooseSmall(List list) {
+        int tempFirst = 0, tempSecond = 0;
 
-        for (int i = 0; i < scoville.length; i++) {
-            if (second > scoville[i] && second != first) {
-                second = scoville[i];
+        for (int i = 0; i < list.size(); i++) {
+            if (tempFirst > (int) list.get(i)) {
+                first = i;
             }
         }
 
+        for (int i = 0; i < list.size(); i++) {
+            if (tempSecond > (int) list.get(i) && tempFirst != tempSecond) {
+                second = i;
+            }
+        }
     }
 
 
