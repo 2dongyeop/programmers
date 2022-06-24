@@ -5,21 +5,21 @@ import java.util.List;
 
 class Solution {
     static int count = 0; //섞은 횟수
-    static int first = 0, second = 0; //첫째, 둘째로 작은 수의 인덱스
-    List<Integer> list = new ArrayList<>();
+    static int firstIndex = 0, secondIndex = 0; //첫째, 둘째로 작은 수의 인덱스
+    static List<Integer> list = new ArrayList<>();
 
-    int solution(int[] scoville, int K) {
-        arrayToList(list, scoville);
+    static int solution(int[] scoville, int K) {
+        arrayToList(list, scoville); //잦은 삭제와 추가로 인해 리스트를 이용
 
-        while (!isBiggerK(list, K)) {
-            makeSpicy(list);
+        while (!isBiggerK(list, K)) { //K보다 작은 값이 없을때까지 반복
+            makeSpicy(list);          //맵게 만들기
         }
 
         int answer = count;
         return answer;
     }
 
-    static void arrayToList(List list, int[] array) {
+    static void arrayToList(final List list, final int[] array) { //배열을 리스트로 복사
         for (int i = 0; i < array.length; i++) {
             int a = array[i];
 
@@ -27,42 +27,48 @@ class Solution {
         }
     }
 
-    static boolean isBiggerK(List list, int K) {
-        boolean isBigger = true;
-        ;
+    static boolean isBiggerK(final List list, final int K) {
+        boolean isBigger = true; //초기값은 모두 K보다 크다고 가정
+
         for (int i = 0; i < list.size(); i++) {
             int temp = (int) list.get(i);
 
-            if (temp < K) isBigger = false;
+            if (temp < K) {
+                isBigger = false; //K보다 작은 값이 있으면 false
+                break;
+            }
         }
         return isBigger;
     }
 
-    static void makeSpicy(List list) {
-        chooseSmall(list);
+    static void makeSpicy(final List list) {
+        chooseSmall(list); //가장 작은 수와 두번째로 작은 수의 인덱스를 알아옴
 
-        int a = (int) list.get(first);
-        int b = (int) list.get(second);
+        int a = (int) list.get(firstIndex);
+        int b = (int) list.get(secondIndex);
         int c = a + 2 * b;
 
         list.add(c);
-        list.remove(first);
-        list.remove(second);
+        list.remove(firstIndex);
+        list.remove(secondIndex);
         count++;
     }
 
-    static void chooseSmall(List list) {
-        int tempFirst = 0, tempSecond = 0;
+    static void chooseSmall(final List list) {
+        int tempFirst = (int) list.get(0);
+        int tempSecond = (int) list.get(0);
 
-        for (int i = 0; i < list.size(); i++) {
-            if (tempFirst > (int) list.get(i)) {
-                first = i;
+        for (int i = 1; i < list.size(); i++) {
+            if (tempFirst >= (int) list.get(i)) {
+                tempFirst = (int) list.get(i);
+                firstIndex = i;
             }
         }
 
         for (int i = 0; i < list.size(); i++) {
-            if (tempSecond > (int) list.get(i) && tempFirst != tempSecond) {
-                second = i;
+            if (tempSecond >= (int) list.get(i) && tempFirst < (int) list.get(i)) {
+                tempSecond = (int) list.get(i);
+                secondIndex = i;
             }
         }
     }
