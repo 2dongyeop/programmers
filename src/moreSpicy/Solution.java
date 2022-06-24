@@ -6,20 +6,21 @@ import java.util.List;
 class Solution {
     static int count = 0; //섞은 횟수
     static int firstIndex = 0, secondIndex = 0; //첫째, 둘째로 작은 수의 인덱스
-    static List<Integer> list = new ArrayList<>();
+    static List<Integer> heap = new ArrayList<>();
 
-    static int solution(int[] scoville, int K) {
-        arrayToList(list, scoville); //잦은 삭제와 추가로 인해 리스트를 이용
+    public int solution(int[] scoville, int K) {
+        arrayToList(heap, scoville); //잦은 삭제와 추가로 인해 리스트를 이용
 
-        while (!isBiggerK(list, K)) { //K보다 작은 값이 없을때까지 반복
-            makeSpicy(list);          //맵게 만들기
+        while (!isBiggerK(heap, K)) { //K보다 작은 값이 없을때까지 반복
+            if (heap.size() < 2) return -1;
+            makeSpicy(heap);          //맵게 만들기
         }
 
         int answer = count;
         return answer;
     }
 
-    static void arrayToList(final List list, final int[] array) { //배열을 리스트로 복사
+    public void arrayToList(final List list, final int[] array) { //배열을 리스트로 복사
         for (int i = 0; i < array.length; i++) {
             int a = array[i];
 
@@ -27,7 +28,7 @@ class Solution {
         }
     }
 
-    static boolean isBiggerK(final List list, final int K) {
+    public boolean isBiggerK(final List list, final int K) {
         boolean isBigger = true; //초기값은 모두 K보다 크다고 가정
 
         for (int i = 0; i < list.size(); i++) {
@@ -41,7 +42,7 @@ class Solution {
         return isBigger;
     }
 
-    static void makeSpicy(final List list) {
+    public void makeSpicy(final List list) {
         chooseSmall(list); //가장 작은 수와 두번째로 작은 수의 인덱스를 알아옴
 
         int a = (int) list.get(firstIndex);
@@ -54,7 +55,7 @@ class Solution {
         count++;
     }
 
-    static void chooseSmall(final List list) {
+    public void chooseSmall(final List list) {
         int tempFirst = (int) list.get(0);
         int tempSecond = (int) list.get(0);
 
@@ -72,6 +73,4 @@ class Solution {
             }
         }
     }
-
-
 }
