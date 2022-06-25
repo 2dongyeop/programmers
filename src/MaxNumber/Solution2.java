@@ -16,6 +16,7 @@ class Solution2 {
         Arrays.sort(stringNumbers, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
+                System.out.println((o2+o1) + "과 " + (o1+o2) + " 비교");
                 return (o2+o1).compareTo(o1+o2);
             }
         });
