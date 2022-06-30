@@ -4,6 +4,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution {
+    public static void main(final String... args) {
+
+        final Solution s = new Solution();
+        final int[] truckWeights = { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+        final int result = s.solution(100, 100, truckWeights);
+
+        System.out.println(result);
+
+    }
+
     public int solution(int bridge_length, int weight, int[] truck_weights) {
         int compeleteTime = 0;
         Queue<Truck> waiting_truck = new LinkedList<>();
@@ -12,17 +22,17 @@ class Solution {
             waiting_truck.add(new Truck(w));
         }
 
-        final Bridge b = new Bridge(weight, bridge_length);
+        final Bridge bridge = new Bridge(weight, bridge_length);
         do {
             compeleteTime++;
 
-            b.movingTrucks();
+            bridge.movingTrucks();
             if (!waiting_truck.isEmpty()) {
-                if (b.isPassingBridge(waiting_truck.peek().getWeight())) {
-                    b.putTruck(waiting_truck.remove());
+                if (bridge.isPassingBridge(waiting_truck.peek().getWeight())) {
+                    bridge.putTruck(waiting_truck.remove());
                 }
             }
-        } while (!b.isEmpty());
+        } while (!bridge.isEmpty());
 
         return compeleteTime;
     }
@@ -58,17 +68,17 @@ class Bridge {
     private int length;
     private int maxWeight;
     private int currentTrucksWeight;
-    private Queue<Truck> bridge;
+    private Queue<Truck> trucks;
 
     Bridge(final int length, final int maxWeight) {
-        this.bridge = new LinkedList<>();
+        this.trucks = new LinkedList<>();
         this.length = length;
         this.maxWeight = maxWeight;
         this.currentTrucksWeight = 0;
     }
 
     boolean isEmpty() {
-        return bridge.isEmpty();
+        return trucks.isEmpty();
     }
 
     boolean isPassingBridge(final int truckWeight) {
@@ -78,22 +88,24 @@ class Bridge {
     }
 
     void movingTrucks() {
-        for (int truckPosition = 0; truckPosition < bridge.size(); truckPosition++) {
-            final Truck truck = bridge.remove();
+        final int currentTruckCount = trucks.size();
+
+        for (int truckPosition = 0; truckPosition < currentTruckCount; truckPosition++) {
+            final Truck truck = trucks.remove();
 
             truck.decrease_remain_distance();
             if (truck.isArrived()) {
                 currentTrucksWeight -= truck.getWeight();
                 continue;
             }
-            bridge.add(truck);
+            trucks.add(truck);
         }
     }
 
     void putTruck(final Truck truck) {
         truck.setRemain_distance(this.length);
 
-        bridge.add(truck);
+        trucks.add(truck);
         this.currentTrucksWeight += truck.getWeight();
     }
 }
