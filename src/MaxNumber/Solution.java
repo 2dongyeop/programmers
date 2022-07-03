@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    int maxNumber;
-    static List<Integer> list = new ArrayList<>();
-    static List<Integer> temp = new ArrayList<>();
+    private int maxNumber;
+    private final List<Integer> list = new ArrayList<>();
+    private final List<Integer> temp = new ArrayList<>();
 
     public String solution(int[] numbers) {
-        arrayToList(temp, numbers); //temp에다 배열을 복사
+        arrayToList(temp, numbers);                             //배열을 리스트로 복사
 
-        while (!temp.isEmpty()) {
-
+        while (!temp.isEmpty()) {                               //temp 리스트가 빌 때까지
             maxNumber = temp.get(0);
+
             for (int i = 1; i < temp.size(); i++) {
                 int digit = temp.get(i) / 10;
-                addMaxNum(maxNumber, temp.get(i), digit, i);
+                addMaxNum(maxNumber, temp.get(i), digit, i);    //최대 수를 판단하여 리스트에 추가
             }
         }
 
@@ -24,15 +24,16 @@ class Solution {
         return answer;
     }
 
-    public void arrayToList(List list, int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            int a = array[i];
-
+    private final void arrayToList(final List list, final int[] array) {
+        for (int a : array) {
             list.add(a);
         }
     }
 
-    public void addMaxNum(int currentMax, int num, int digit, int index) {
+    //각 숫자의 맨 첫 자리수 크기를 비교
+    //3과 23을 비교할 경우 3 * 10과 23을 비교
+    //단, 이 경우 [34, 3, 5]가 있을 경우 "5343"이 아닌 "5334"로 배치될 수도 있어 문제가 발생
+    private final void addMaxNum(final int currentMax, final int num, final int digit, final int index) {
         if (digit < 1) { //1자리수
             if (currentMax < num) {
                 maxNumber = num;
@@ -59,9 +60,7 @@ class Solution {
             }
         }
     }
-
 }
-
 
 //int a가 0~9이면 a / 10 = 0; -> 1미만이면 1자리수
 //10~99면 1~9;                -> 10미만이면 2자리수
