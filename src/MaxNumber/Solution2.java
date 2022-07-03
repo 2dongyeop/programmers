@@ -2,6 +2,7 @@ package maxNumber;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 class Solution2 {
     public String solution(int[] numbers) {
@@ -21,15 +22,14 @@ class Solution2 {
             }
         });
 
-        for (String str : stringNumbers) {
+        for (String str : stringNumbers) {      //정렬된 순서대로 answer에 추가
             answer += str;
         }
 
-        if (stringNumbers[0].equals("0")) {
+        if (stringNumbers[0].equals("0")) {     //배열이 {0, 0, 0} 처럼 0으로만 주어질 경우 0을 리턴
             return "0";
         }
 
         return answer;
     }
-    
 }
