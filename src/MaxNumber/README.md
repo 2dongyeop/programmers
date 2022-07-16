@@ -1,4 +1,4 @@
-## 프린터
+## 가장 큰 수
 
 ----
 [개인 노션 링크](https://leedongyeop.notion.site/max-number-80a201017db74224883c26e27f6d5d2c)
