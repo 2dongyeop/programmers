@@ -1,4 +1,4 @@
-package maxNumber;
+package sort.maxNumber;
 
 import java.util.ArrayList;
 import java.util.List;

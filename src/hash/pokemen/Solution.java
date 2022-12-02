@@ -1,4 +1,4 @@
-package pokemen;
+package hash.pokemen;
 
 import java.util.HashSet;
 

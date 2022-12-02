@@ -1,8 +1,7 @@
-package maxNumber;
+package sort.maxNumber;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 class Solution2 {
     public String solution(int[] numbers) {

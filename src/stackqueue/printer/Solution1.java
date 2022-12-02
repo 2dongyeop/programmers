@@ -1,4 +1,4 @@
-package printer;
+package stackqueue.printer;
 import java.util.*;
 
 public class Solution1 {

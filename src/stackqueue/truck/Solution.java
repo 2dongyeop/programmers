@@ -1,4 +1,4 @@
-package truck;
+package stackqueue.truck;
 
 import java.util.LinkedList;
 import java.util.Queue;

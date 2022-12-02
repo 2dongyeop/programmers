@@ -1,4 +1,4 @@
-package targetNumber;
+package dfsbfs.targetNumber;
 
 public class Solution {
     private int sum = 0;

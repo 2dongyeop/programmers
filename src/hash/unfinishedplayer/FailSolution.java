@@ -1,4 +1,4 @@
-package unfinishedplayer;
+package hash.unfinishedplayer;
 
 public class FailSolution {
     public String solution(String[] participant, String[] completion) {

@@ -1,4 +1,4 @@
-package moreSpicy;
+package heap.moreSpicy;
 
 import java.util.PriorityQueue;
 

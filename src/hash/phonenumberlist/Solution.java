@@ -1,4 +1,4 @@
-package phonenumberlist;
+package hash.phonenumberlist;
 
 import java.util.Arrays;
 
