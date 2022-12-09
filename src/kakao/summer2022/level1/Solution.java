@@ -1,9 +1,9 @@
-package KakaoCodingTest2022;
+package kakao.summer2022.level1;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Solution1 {
+public class Solution {
     public int[] solution(String[] id_list, String[] report, int k) {
         int[] answer = new int[id_list.length];
 
